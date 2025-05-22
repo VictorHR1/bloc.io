@@ -2,108 +2,178 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Mensagem de Boas-Vindas - CCM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Mensagem Sofisticado - CCM</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #224080;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background-color: #f0f4f8; /* Fundo suave */
+      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       min-height: 100vh;
+      box-sizing: border-box;
     }
 
     .container {
       background-color: #ffffff;
-      color: #000;
-      border-radius: 16px;
-      padding: 30px;
+      border-radius: 12px;
+      padding: 35px 40px;
       width: 90%;
-      max-width: 600px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 650px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
       text-align: center;
     }
 
     .logo {
       display: block;
-      margin: 0 auto 20px;
-      max-width: 180px;
-    }
-
-    input {
-      padding: 10px 20px;
-      width: 30%;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #224080;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 5px;
-    }
-
-    button:hover {
-      background-color: #1a3166;
-    }
-
-    .arrow {
-      font-size: 18px;
-    }
-
-    textarea {
-      margin-top: 20px;
-      width: 80%;
-      height: 280px;
-      padding: 15px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      resize: vertical;
+      margin: 0 auto 25px;
+      max-width: 160px; /* Ajuste o tamanho conforme necessário */
     }
 
     h2 {
-      margin-bottom: 20px;
-      color: #224080;
+      margin-bottom: 30px;
+      color: #224080; /* Cor principal do CCM */
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      border: 1px solid #d1d9e6; /* Borda sutil */
+      border-radius: 8px;
+      overflow: hidden; /* Para os cantos arredondados do input/botão */
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .input-group:focus-within { /* Destaque ao focar em elementos internos */
+      border-color: #224080;
+      box-shadow: 0 0 0 3px rgba(34, 64, 128, 0.15);
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 14px 18px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px 0 0 8px; /* Cantos arredondados à esquerda */
+      outline: none;
+      color: #333;
+      background-color: #fff;
+    }
+
+    input[type="text"]::placeholder {
+      color: #99a3b0; /* Cor do placeholder mais suave */
+    }
+
+    button#generateBtn {
+      padding: 14px 18px;
+      background-color: #224080;
+      color: #fff;
+      border: none;
+      border-left: 1px solid #1a3166; /* Linha sutil de separação */
+      border-radius: 0 8px 8px 0; /* Cantos arredondados à direita */
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button#generateBtn:hover {
+      background-color: #1a3166; /* Tom mais escuro no hover */
+    }
+
+    button#generateBtn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    textarea#mensagemFinal {
+      margin-top: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      height: 280px;
+      padding: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+      border-radius: 8px;
+      border: 1px solid #d1d9e6;
+      resize: vertical;
+      background-color: #f8f9fa; /* Fundo levemente diferente */
+      color: #333;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    textarea#mensagemFinal:focus {
+      border-color: #224080;
+      box-shadow: 0 0 0 3px rgba(34, 64, 128, 0.15);
+    }
+
+    /* Classe para acessibilidade: oculta visualmente mas mantém para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Ajustes para telas menores */
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      input[type="text"], button#generateBtn {
+        padding: 12px 15px;
+        font-size: 15px;
+      }
+      button#generateBtn svg {
+        width: 18px;
+        height: 18px;
+      }
+      textarea#mensagemFinal {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <img src="CCM.png" alt="Logo CCM" class="logo" />
-    <h2>Gerador de Mensagem de Boas-Vindas</h2>
+    <img src="CCM.png" alt="Logo CCM" class="logo" /> <h2>Gerador de Mensagem de Boas-Vindas</h2>
 
-    <label for="nome">Nome do usuário:</label><br>
-    <input type="text" id="nome" placeholder="Ex: usuario" required />
-    <button onclick="gerarMensagem()"> <span class="arrow">➡️</span>
-    </button>
+    <div class="input-group">
+      <label for="nome" class="sr-only">Nome do usuário:</label>
+      <input type="text" id="nome" placeholder="Digite o nome do usuário" required />
+      <button id="generateBtn" onclick="gerarMensagem()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+        </svg>
+      </button>
+    </div>
 
-    <textarea id="mensagemFinal" readonly placeholder="A mensagem aparecerá aqui..."></textarea>
+    <textarea id="mensagemFinal" readonly placeholder="Sua mensagem personalizada aparecerá aqui..."></textarea>
   </div>
 
   <script>
-     documnet.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        gerarMensagem();
-      }
-      document.getElementById("nome").focus();
-    });
+    const nomeInput = document.getElementById("nome");
+    const mensagemFinalTextarea = document.getElementById("mensagemFinal");
+
     function saudacaoPorHorario() {
       const hora = new Date().getHours();
       if (hora >= 5 && hora < 12) return "Bom dia";
@@ -112,9 +182,10 @@
     }
 
     function gerarMensagem() {
-      const nome = document.getElementById("nome").value.trim();
+      const nome = nomeInput.value.trim();
       if (!nome) {
         alert("Por favor, insira o nome do usuário.");
+        nomeInput.focus(); // Foca no input se estiver vazio
         return;
       }
 
@@ -125,22 +196,35 @@
 Conforme solicitado, seguem abaixo as informações de acesso:
 
 REDE / PROTHEUS
-Usuário: vlu
+Usuário: ${nome}
 Senha: Ccm@123
 
 Portal de Chamados
-Usuário: vlu@ccmindustria.com.br
+Usuário: ${nome}@ccmindustria.com.br
 Senha: Ccm@123
 
 E-mail Corporativo
-Endereço: vlu@ccmindustria.com.br
+Endereço: ${nome}@ccmindustria.com.br
 A senha do e-mail corresponde à senha do computador. Após o primeiro acesso, ao realizar a alteração da senha do computador, a senha do e-mail será atualizada automaticamente.
 
 Fico à disposição para quaisquer dúvidas.`;
 
-      const textoFinal = textoBase.replaceAll("vlu", nome);
-      document.getElementById("mensagemFinal").value = textoFinal;
+      mensagemFinalTextarea.value = textoBase;
     }
+
+    // Adiciona listener para a tecla "Enter" no campo de nome
+    nomeInput.addEventListener("keypress", function(event) {
+      // Verifica se a tecla pressionada foi Enter
+      if (event.key === "Enter" || event.keyCode === 13) { // keyCode para compatibilidade
+        event.preventDefault(); // Previne o comportamento padrão do Enter (ex: submit de form)
+        gerarMensagem();
+      }
+    });
+
+    // Focar no campo de nome ao carregar a página para melhor UX
+    window.addEventListener("load", () => {
+      nomeInput.focus();
+    });
   </script>
 
 </body>
