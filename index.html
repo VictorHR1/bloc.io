@@ -90,7 +90,7 @@
     <h2>Gerador de Mensagem de Boas-Vindas</h2>
 
     <label for="nome">Nome do usuário:</label><br>
-    <input type="text" id="nome" placeholder="Ex: jfernandes" />
+    <input type="text" id="nome" placeholder="Ex: usuario" required />
     <button onclick="gerarMensagem()"> <span class="arrow">➡️</span>
     </button>
 
@@ -98,6 +98,12 @@
   </div>
 
   <script>
+     documnet.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        gerarMensagem();
+      }
+      document.getElementById("nome").focus();
+    });
     function saudacaoPorHorario() {
       const hora = new Date().getHours();
       if (hora >= 5 && hora < 12) return "Bom dia";
